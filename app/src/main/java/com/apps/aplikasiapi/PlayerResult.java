@@ -1,8 +1,11 @@
 package com.apps.aplikasiapi;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 public class PlayerResult {
+    @SerializedName(value = "player",alternate = {"players"})
     private ArrayList<Player> player;
 
     public PlayerResult(ArrayList<Player> player) {

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.android.volley.Request;
@@ -40,9 +41,20 @@ public class MainActivity extends AppCompatActivity {
         //GridLayoutManager gr = new GridLayoutManager(this,2); //tampilan dua baris sejajar ke bawah
         //StaggeredGridLayoutManager st = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL); //tampilan dua baris ke bawah tidak sejajar
         DividerItemDecoration divider = new DividerItemDecoration(this, lm.getOrientation());
+
         rvPlayer.setLayoutManager(lm);
         rvPlayer.setAdapter(adapter);
         rvPlayer.addItemDecoration(divider);
+
+        adapter.setListener(new OnClikListener() {
+            @Override
+            public void aksiKlik(int position) {
+                //cara untk berpindah halaman
+                Intent intent = new Intent(MainActivity.this, DetailActivity.class);//berpindah intent dari satu layout ke layout lainnya
+                intent.putExtra("idPlayer", players.get(position).getIdPlayer());
+                startActivity(intent);
+            }
+        });
     }
     public void ambilData() {
         //meminta request dengan volley
